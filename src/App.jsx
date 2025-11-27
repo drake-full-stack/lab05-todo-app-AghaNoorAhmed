@@ -1,8 +1,9 @@
 import { useState } from "react";
 import "./App.css";
-//checkpoint 1
+
 function App() {
   // ===== Use State Variables =====
+  // Checkpoint 1: Converted tasks to objects
 const [tasks, setTasks] = useState([
   { id: 1, text: "Project 1", completed: false },
   { id: 2, text: "Laundry", completed: false },
