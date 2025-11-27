@@ -79,3 +79,9 @@ h1 {
 .delete-button:hover {
   opacity: 1;
 }
+
+/* Checkpoint 4: styling complete */
+.task-text.completed {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
