@@ -28,7 +28,7 @@ const handleAddTask = (e) => {
 };
 const handleDelete = (idToDelete) => {
   setTasks(tasks.filter((task) => task.id !== idToDelete));
-};
+}; // Checkpoint 2: Toggle complete function
 const handleToggleComplete = (idToToggle) => {
   setTasks(
     tasks.map((task) =>
