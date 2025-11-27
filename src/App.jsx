@@ -58,7 +58,7 @@ const handleToggleComplete = (idToToggle) => {
       </form>
 
 <ul className="task-list">
-  {tasks.map((task) => (
+  {tasks.map((task) => ( // Checkpoint 3: Added checkbox input
     <li key={task.id} className="task-item">
       <label className="task-label">
         <input
