@@ -1,28 +1,43 @@
 import { useState } from "react";
 import "./App.css";
-
+//checkpoint 1
 function App() {
   // ===== Use State Variables =====
-  const [tasks, setTasks] = useState([
-    "Project 1",
-    "Laundry",
-    "Walk Dogs",
-    "clean room",
-  ]);
+const [tasks, setTasks] = useState([
+  { id: 1, text: "Project 1", completed: false },
+  { id: 2, text: "Laundry", completed: false },
+  { id: 3, text: "Walk Dogs", completed: false },
+  { id: 4, text: "Clean room", completed: false },
+]);
   const [inputValue, setInputValue] = useState("");
 
   // ===== Functions ======
-  const handleAddTask = (e) => {
-    e.preventDefault();
+const handleAddTask = (e) => {
+  e.preventDefault();
 
-    if (inputValue.trim()) {
-      setTasks([...tasks, inputValue]);
-    }
-    setInputValue("");
-  };
-  const handleDelete = (indexToDelete) => {
-    setTasks(tasks.filter((_, index) => index !== indexToDelete));
-  };
+  if (inputValue.trim()) {
+    const newTask = {
+      id: Date.now(),
+      text: inputValue.trim(),
+      completed: false,
+    };
+    setTasks([...tasks, newTask]);
+  }
+  setInputValue("");
+};
+const handleDelete = (idToDelete) => {
+  setTasks(tasks.filter((task) => task.id !== idToDelete));
+};
+const handleToggleComplete = (idToToggle) => {
+  setTasks(
+    tasks.map((task) =>
+      task.id === idToToggle
+        ? { ...task, completed: !task.completed }
+        : task
+    )
+  );
+};
+
 
   // ==== JSX that gets returned =====
   return (
@@ -41,19 +56,30 @@ function App() {
         </button>
       </form>
 
-      <ul className="task-list">
-        {tasks.map((task, index) => (
-          <li key={index} className="task-item">
-            <span className="task-text">{task}</span>
-            <button
-              className="delete-button"
-              onClick={() => handleDelete(index)}
-            >
-              🗑️
-            </button>
-          </li>
-        ))}
-      </ul>
+<ul className="task-list">
+  {tasks.map((task) => (
+    <li key={task.id} className="task-item">
+      <label className="task-label">
+        <input
+          type="checkbox"
+          checked={task.completed}
+          onChange={() => handleToggleComplete(task.id)}
+          className="task-checkbox"
+        />
+        <span className={`task-text ${task.completed ? "completed" : ""}`}>
+          {task.text}
+        </span>
+      </label>
+
+      <button
+        className="delete-button"
+        onClick={() => handleDelete(task.id)}
+      >
+        🗑️
+      </button>
+    </li>
+  ))}
+</ul>
     </div>
   );
 }
